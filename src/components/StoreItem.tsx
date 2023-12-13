@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {Book} from "../hooks/useSearch";
 import {IMAGE_NOT_FOUND} from "../constants";
 import {formatCurreny} from "../utils/currencyUtils";
+import {ShoppingButtons} from "./ShoppingButtons";
 
 export function StoreItem(item: Book) {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export function StoreItem(item: Book) {
           </span>
           <span className="p-1">{item.volumeInfo.title}</span>
         </Card.Title>
-        {/* <ShoppingButtons item={item} /> */}
+        <ShoppingButtons item={item} />
       </Card.Body>
     </Card>
   );

@@ -5,6 +5,7 @@ import {Book} from "../hooks/useSearch";
 import {getBookByID} from "../services/bookServices";
 import {IMAGE_NOT_FOUND} from "../constants";
 import {formatCurreny} from "../utils/currencyUtils";
+import {ShoppingButtons} from "../components/ShoppingButtons";
 
 export function Item() {
   const {itemId} = useParams();
@@ -43,6 +44,7 @@ export function Item() {
                     fluid
                     thumbnail
                   />
+                  <ShoppingButtons item={item} />
                 </Col>
                 <Col className="md-7">
                   <Row>
