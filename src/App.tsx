@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Store />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/item" element={<Item />} />
+          <Route path="/item/:itemId" element={<Item />} />
         </Routes>
       </Container>
     </ShoopingCartProvider>
