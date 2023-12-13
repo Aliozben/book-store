@@ -1,4 +1,4 @@
-import Axios, {AxiosResponse} from "axios";
+import Axios, {AxiosResponse, Canceler} from "axios";
 import {useEffect, useState} from "react";
 import {API_ENDPOINT, PAGINATION_SIZE} from "../constants";
 
@@ -44,6 +44,7 @@ export function useSearch(query: string, paginationNumber: number) {
     try {
       setLoading(true);
       setError(false);
+      let cancel: Canceler;
       Axios.get<unknown, AxiosResponse<{totalItems: number; items: Book[]}>>(
         API_ENDPOINT,
         {
@@ -52,6 +53,7 @@ export function useSearch(query: string, paginationNumber: number) {
             startIndex: paginationNumber,
             maxResults: PAGINATION_SIZE,
           },
+          cancelToken: new Axios.CancelToken(c => (cancel = c)),
         }
       )
         .then(res => {
@@ -71,6 +73,9 @@ export function useSearch(query: string, paginationNumber: number) {
           console.error("coudln't search the given text", err);
           setError(true);
         });
+      return () => {
+        cancel();
+      };
     } catch (error) {
       setError(true);
       console.error("couldn't search the given text...", error);
