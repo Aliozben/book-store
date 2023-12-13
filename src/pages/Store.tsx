@@ -1,14 +1,31 @@
 import {Col, Form, InputGroup, Row} from "react-bootstrap";
 import {StoreItem} from "../components/StoreItem";
-import {useSearch} from "../hooks/useSearch";
-import {useCallback, useRef, useState} from "react";
-import {PAGINATION_SIZE} from "../constants";
+import {Book, useSearch} from "../hooks/useSearch";
+import {useCallback, useEffect, useRef, useState} from "react";
+import {FEATURED_BOOK_IDS, PAGINATION_SIZE} from "../constants";
+import {FeaturedBooks} from "../components/FeaturedBooks";
+import {getBookByID} from "../services/bookServices";
 
 export function Store() {
+  const [featuredBooks, setFeaturedBooks] = useState<Book[]>([]);
   const [searchText, setSearchText] = useState<string>("");
   const [paginationNumber, setPaginationNumber] = useState<number>(0);
 
   const {books, error, loading} = useSearch(searchText, paginationNumber);
+
+  useEffect(() => {
+    fetchFeaturedBooks(FEATURED_BOOK_IDS)
+      .then(books => {
+        setFeaturedBooks(books);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, []);
+
+  async function fetchFeaturedBooks(ids: string[]) {
+    return await Promise.all(ids.map(id => getBookByID(id)));
+  }
 
   const observer = useRef<IntersectionObserver>();
   const lastBookElementRef = useCallback(
@@ -56,32 +73,36 @@ export function Store() {
       <p className="mb-3 text-muted text-right">
         {searchText && " For more result scroll down."}
       </p>
-      <>
-        <Row
-          md={2}
-          lg={3}
-          xl={4}
-          xxl={5}
-          className="g-3 nav justify-content-center"
-        >
-          {books.length > 0 &&
-            books.map((book, index) => {
-              if (books.length === index + 1) {
-                return (
-                  <Col ref={lastBookElementRef} key={book.id}>
-                    <StoreItem {...book} />
-                  </Col>
-                );
-              } else {
-                return (
-                  <Col key={book.id}>
-                    <StoreItem {...book} />
-                  </Col>
-                );
-              }
-            })}
-        </Row>
-      </>
+      {!searchText ? (
+        <FeaturedBooks featuredBooks={featuredBooks} />
+      ) : (
+        <>
+          <Row
+            md={2}
+            lg={3}
+            xl={4}
+            xxl={5}
+            className="g-3 nav justify-content-center"
+          >
+            {books.length > 0 &&
+              books.map((book, index) => {
+                if (books.length === index + 1) {
+                  return (
+                    <Col ref={lastBookElementRef} key={book.id}>
+                      <StoreItem {...book} />
+                    </Col>
+                  );
+                } else {
+                  return (
+                    <Col key={book.id}>
+                      <StoreItem {...book} />
+                    </Col>
+                  );
+                }
+              })}
+          </Row>
+        </>
+      )}
     </>
   );
 }
