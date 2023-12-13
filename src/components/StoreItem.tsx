@@ -1,6 +1,7 @@
 import {Card} from "react-bootstrap";
 import {Book} from "../pages/Store";
 import {IMAGE_NOT_FOUND} from "../constants";
+import {formatCurreny} from "../utils/currencyUtils";
 
 export function StoreItem(item: Book) {
   return (
@@ -20,7 +21,10 @@ export function StoreItem(item: Book) {
           <Card.Title className="d-flex flex-column">
             <span className="text-end p-1 fs-6 text-primary">
               {item.saleInfo.listPrice
-                ? item.saleInfo.listPrice.amount
+                ? formatCurreny(
+                    item.saleInfo.listPrice.amount,
+                    item.saleInfo.listPrice.currencyCode
+                  )
                 : "Not for sale"}
             </span>
             <span className="p-1">{item.volumeInfo.title}</span>
