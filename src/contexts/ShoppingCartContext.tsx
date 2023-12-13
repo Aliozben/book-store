@@ -1,4 +1,4 @@
-import {ReactNode, createContext, useContext, useState} from "react";
+import {ReactNode, createContext, useState} from "react";
 import {Book} from "../pages/Store";
 
 type ShoopingCartProviderProps = {
@@ -21,9 +21,6 @@ export type CartItem = Book & {
 
 export const ShoopingCartContext = createContext({} as ShoopingCartContext);
 
-export function useShoppingCart() {
-  return useContext(ShoopingCartContext);
-}
 export function ShoopingCartProvider({children}: ShoopingCartProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 

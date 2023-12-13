@@ -2,7 +2,7 @@ import {Card} from "react-bootstrap";
 import {Book} from "../pages/Store";
 import {IMAGE_NOT_FOUND} from "../constants";
 import {formatCurreny} from "../utils/currencyUtils";
-import {useShoppingCart} from "../contexts/ShoppingCartContext";
+import {useShoppingCart} from "../hooks/useShoppingCart";
 
 export function StoreItem(item: Book) {
   const {
