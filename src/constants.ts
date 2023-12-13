@@ -1,5 +1,6 @@
 //API
 export const API_ENDPOINT = "https://www.googleapis.com/books/v1/volumes";
+export const PAGINATION_SIZE = 15;
 
 //StoreItem.tsx
 export const IMAGE_NOT_FOUND =
