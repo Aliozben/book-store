@@ -1,8 +1,8 @@
 import {Card} from "react-bootstrap";
-import {Book} from "../pages/Store";
 import {IMAGE_NOT_FOUND} from "../constants";
 import {formatCurreny} from "../utils/currencyUtils";
 import {useShoppingCart} from "../hooks/useShoppingCart";
+import { Book } from "../hooks/useSearch";
 
 export function StoreItem(item: Book) {
   const {
