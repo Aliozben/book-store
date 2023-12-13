@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import {useShoppingCart} from "../hooks/useShoppingCart";
 
 export function Navbar() {
-  const {cartQuantity} = useShoppingCart();
+  const {cartQuantity, openCart} = useShoppingCart();
 
   return (
     <NavbarBoot sticky="top" className="bg-white shadow-sm mb3">
@@ -16,6 +16,7 @@ export function Navbar() {
         <Button
           style={{width: "3rem", height: "3rem", position: "relative"}}
           variant="outline-primary"
+          onClick={openCart}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -9,8 +9,8 @@ import {ShoopingCartProvider} from "./contexts/ShoppingCartContext";
 function App() {
   return (
     <ShoopingCartProvider>
+      <Navbar />
       <Container className="mb-4">
-        <Navbar />
         <Routes>
           <Route path="/" element={<Store />} />
           <Route path="/checkout" element={<Checkout />} />
