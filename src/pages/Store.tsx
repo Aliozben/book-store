@@ -1,4 +1,4 @@
-import {Col, Form, InputGroup, Row} from "react-bootstrap";
+import {Col, Form, InputGroup, Row, Spinner} from "react-bootstrap";
 import {StoreItem} from "../components/StoreItem";
 import {Book, useSearch} from "../hooks/useSearch";
 import {useCallback, useEffect, useRef, useState} from "react";
@@ -84,22 +84,30 @@ export function Store() {
             xxl={5}
             className="g-3 nav justify-content-center"
           >
-            {books.length > 0 &&
-              books.map((book, index) => {
-                if (books.length === index + 1) {
-                  return (
-                    <Col ref={lastBookElementRef} key={book.id}>
-                      <StoreItem {...book} />
-                    </Col>
-                  );
-                } else {
-                  return (
-                    <Col key={book.id}>
-                      <StoreItem {...book} />
-                    </Col>
-                  );
-                }
-              })}
+            {books.length > 0
+              ? books.map((book, index) => {
+                  if (books.length === index + 1) {
+                    return (
+                      <Col ref={lastBookElementRef} key={book.id}>
+                        <StoreItem {...book} />
+                      </Col>
+                    );
+                  } else {
+                    return (
+                      <Col key={book.id}>
+                        <StoreItem {...book} />
+                      </Col>
+                    );
+                  }
+                })
+              : !loading && <p className="text-center">No books found.</p>}
+            {loading && !error && (
+              <Spinner
+                className="mt-3"
+                animation="border"
+                variant="secondary"
+              />
+            )}
           </Row>
         </>
       )}
