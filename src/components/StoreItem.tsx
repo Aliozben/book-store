@@ -2,9 +2,19 @@ import {Card} from "react-bootstrap";
 import {Book} from "../pages/Store";
 import {IMAGE_NOT_FOUND} from "../constants";
 import {formatCurreny} from "../utils/currencyUtils";
+import {useShoppingCart} from "../contexts/ShoppingCartContext";
 
 export function StoreItem(item: Book) {
-  const quantity = 1;
+  const {
+    getItemQuantity,
+    addToCart,
+    decreaseCartQuantity,
+    increaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
+
+  const quantity = getItemQuantity(item.id);
+
   return (
     <Card className="h-100" style={{width: "15rem"}}>
       <Card.Img
@@ -32,7 +42,12 @@ export function StoreItem(item: Book) {
         {item.saleInfo.saleability === "FOR_SALE" && (
           <div className="mt-auto">
             {quantity === 0 ? (
-              <button className="btn btn-outline-primary w-100">
+              <button
+                className="btn btn-outline-primary w-100"
+                onClick={() => {
+                  addToCart(item);
+                }}
+              >
                 + Add To Cart
               </button>
             ) : (
@@ -44,13 +59,34 @@ export function StoreItem(item: Book) {
                   className="d-flex align-items-center justify-content-center"
                   style={{gap: ".5rem"}}
                 >
-                  <button className="btn btn-outline-primary">-</button>
+                  <button
+                    className="btn btn-outline-primary"
+                    onClick={() => {
+                      decreaseCartQuantity(item.id);
+                    }}
+                  >
+                    -
+                  </button>
                   <div>
                     <span className="fs-3">{quantity}</span> in cart
                   </div>
-                  <button className="btn btn-outline-primary">+</button>
+                  <button
+                    className="btn btn-outline-primary"
+                    onClick={() => {
+                      increaseCartQuantity(item.id);
+                    }}
+                  >
+                    +
+                  </button>
                 </div>
-                <button className="btn btn-danger">Remove</button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    removeFromCart(item.id);
+                  }}
+                >
+                  Remove
+                </button>
               </div>
             )}
           </div>
