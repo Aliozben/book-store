@@ -47,6 +47,7 @@ export function Store() {
     setSearchText(text);
     setPaginationNumber(0);
   }
+
   return (
     <>
       <InputGroup className="mt-3">
@@ -84,29 +85,32 @@ export function Store() {
             xxl={5}
             className="g-3 nav justify-content-center"
           >
-            {books.length > 0
-              ? books.map((book, index) => {
-                  if (books.length === index + 1) {
-                    return (
-                      <Col ref={lastBookElementRef} key={book.id}>
-                        <StoreItem {...book} />
-                      </Col>
-                    );
-                  } else {
-                    return (
-                      <Col key={book.id}>
-                        <StoreItem {...book} />
-                      </Col>
-                    );
-                  }
-                })
-              : !loading && <p className="text-center">No books found.</p>}
-            {loading && !error && (
+            {books.length > 0 &&
+              books.map((book, index) => {
+                if (books.length === index + 1) {
+                  return (
+                    <Col ref={lastBookElementRef} key={book.id}>
+                      <StoreItem {...book} />
+                    </Col>
+                  );
+                } else {
+                  return (
+                    <Col key={book.id}>
+                      <StoreItem {...book} />
+                    </Col>
+                  );
+                }
+              })}
+            {loading && !error ? (
               <Spinner
                 className="mt-3"
                 animation="border"
                 variant="secondary"
               />
+            ) : (
+              books.length === 0 && (
+                <p className="text-center">No book is found.</p>
+              )
             )}
           </Row>
         </>
