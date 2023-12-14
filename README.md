@@ -1,30 +1,104 @@
-# React + TypeScript + Vite
+# Book Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a frontend implementation of an online bookstore using [React.js]. Allowing users to browse featured books, view book details, add books to their shopping cart, and proceed to checkout.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Book Store](#book-store)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+    - [Homepage](#homepage)
+    - [Book Details](#book-details)
+    - [Shopping Cart](#shopping-cart)
+    - [Checkout](#checkout)
+    - [Responsive Design](#responsive-design)
+  - [Technologies Used](#technologies-used)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Folder Structure](#folder-structure)
+## Features
 
-## Expanding the ESLint configuration
+### Homepage
+- Displays a list of featured books.
+- Includes a search bar to search for books by title or author.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Book Details
+- Clicking on a book leads to a details page showing information about the book (title, author, description, etc.).
 
-- Configure the top-level `parserOptions` property like this:
+### Shopping Cart
+- Allows users to add/remove books to their shopping cart.
+- Displays the total price and allows users to proceed to checkout page.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Checkout
+- Allows users to remove books to their shopping cart.
+- Displays the total price and allows users to proceed to checkout.
+
+### Responsive Design
+- Ensures the website is responsive and works well on various devices.
+
+## Technologies Used
+
+- [React.js]: JavaScript framework for building the frontend.
+- [react-router-dom](https://reactrouter.com/web/guides/quick-start): For routing in React applications.
+- [axios](https://www.npmjs.com/package/axios): Used for making HTTP requests.
+- [Bootstrap](https://getbootstrap.com/): CSS framework for responsive design and styling.
+- [react-bootstrap](https://react-bootstrap.github.io/): React components for Bootstrap.
+- [react-hook-form](https://react-hook-form.com/): Performant and flexible forms with easy-to-use validation (React).
+
+## Installation
+
+1. Requirements
+   - [Node.js](https://nodejs.org/en)
+   - [pnpm](https://pnpm.io/)
+
+2. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/online-bookstore-frontend.git
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   pnpm i
+   ```
+
+## Usage
+
+- For development
+   ```
+   pnpm run dev
+   ```
+- For production
+   ```
+   pnpm run build
+
+   ```
+   - If you want to preview the build
+      ```
+      pnpm run preview
+      ```
+
+## Folder Structure
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+book-store/
+│
+├── src/
+│   ├── components/          # Contains reusable UI components
+│   ├── pages/               # Components for different pages (Homepage, Book Details, Checkout)
+│   ├── services/            # API service files for fetching book data
+│   ├── contexts/            # Context providers used for state management
+│   ├── hooks/               # Custom hooks used in the application
+|   ├── utils/               # Utility/helper functions
+|   ├── constants.ts         # File for global constants or configuration settings
+│   └── App.tsx              # Main application file
+│
+├── .eslint                  # ESLint configuration file
+├── package.json             # Node.js dependencies and scripts
+├── pnpm-lock.yaml           # Package manager lock file
+├── index.html               # HTML template
+├── tsconfig.json            # TypeScript configuration file (for general configurations)
+├── tsconfig.node.json       # TypeScript configuration for Node.js-related code
+├── vite.config.ts           # Vite configuration file
+└── README.md                # Project documentation
+```
