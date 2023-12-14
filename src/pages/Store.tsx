@@ -101,18 +101,20 @@ export function Store() {
                   );
                 }
               })}
-            {loading && !error ? (
+          </Row>
+          {loading && !error ? (
+            <Row className="g-3 mt-3 nav justify-content-center">
               <Spinner
                 className="mt-3"
                 animation="border"
                 variant="secondary"
               />
-            ) : (
-              books.length === 0 && (
-                <p className="text-center">No book is found.</p>
-              )
-            )}
-          </Row>
+            </Row>
+          ) : (
+            books.length === 0 && (
+              <p className="text-center">No book is found.</p>
+            )
+          )}
         </>
       )}
     </>
